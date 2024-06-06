@@ -1,5 +1,9 @@
 package controller;
 
+import model.CalculatorModel;
+import service.CalculatorService;
+import view.CalculatorView;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

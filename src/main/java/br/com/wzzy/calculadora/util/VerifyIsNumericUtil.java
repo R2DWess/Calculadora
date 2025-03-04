@@ -1,5 +1,8 @@
 package br.com.wzzy.calculadora.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VerifyIsNumericUtil {
 
     public boolean isNumeric(String strNumber) {

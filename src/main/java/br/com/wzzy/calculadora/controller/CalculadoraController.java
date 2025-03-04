@@ -1,40 +1,40 @@
 package br.com.wzzy.calculadora.controller;
 
-import br.com.wzzy.calculadora.exception.UnsupportedMathOperationException;
-import br.com.wzzy.calculadora.util.ConvertToDoubleUtil;
-import br.com.wzzy.calculadora.util.VerifyIsNumericUtil;
+import br.com.wzzy.calculadora.model.CalculadoraModel;
+import br.com.wzzy.calculadora.service.CalculadoraService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("v1/calculadora")
 public class CalculadoraController {
 
-    private final AtomicLong counter = new AtomicLong();
-    private VerifyIsNumericUtil verifyIsNumericUtil;
-    private ConvertToDoubleUtil converterParaDouble;
+    private CalculadoraService calculadoraService;
+
+    public CalculadoraController(CalculadoraService calculadoraService) {
+        this.calculadoraService = calculadoraService;
+    }
 
     @RequestMapping(value = "/soma/{numberOne}/{numberTwo}",
     method = RequestMethod.GET)
     public Double soma(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo) throws Exception {
-        if (!verifyIsNumericUtil.isNumeric(numberOne) || !verifyIsNumericUtil.isNumeric(numberTwo)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
-        }
-        return converterParaDouble.convertToDouble(numberOne) + converterParaDouble.convertToDouble(numberTwo);
+
+        CalculadoraModel calculadoraModel = new CalculadoraModel(numberOne, numberTwo, null);
+
+        return calculadoraService.soma(calculadoraModel);
     }
+
 
     @RequestMapping(value = "/substracao/{numberOne}/{numberTwo}",
             method = RequestMethod.GET)
     public Double substracao(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo) throws Exception {
-        if (!verifyIsNumericUtil.isNumeric(numberOne) || !verifyIsNumericUtil.isNumeric(numberTwo)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
-        }
-        return converterParaDouble.convertToDouble(numberOne) - converterParaDouble.convertToDouble(numberTwo);
+
+        CalculadoraModel calculadoraModel = new CalculadoraModel(numberOne, numberTwo, null);
+
+        return calculadoraService.substracao(calculadoraModel);
     }
 
     @RequestMapping(value = "/multiplicacao/{numberOne}/{numberTwo}",
@@ -42,10 +42,10 @@ public class CalculadoraController {
     public Double multiplicacao(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo) throws Exception {
-        if (!verifyIsNumericUtil.isNumeric(numberOne) || !verifyIsNumericUtil.isNumeric(numberTwo)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
-        }
-        return converterParaDouble.convertToDouble(numberOne) * converterParaDouble.convertToDouble(numberTwo);
+
+        CalculadoraModel calculadoraModel = new CalculadoraModel(numberOne, numberTwo, null);
+
+        return calculadoraService.multiplicacao(calculadoraModel);
     }
 
     @RequestMapping(value = "/divisao/{numberOne}/{numberTwo}",
@@ -53,31 +53,30 @@ public class CalculadoraController {
     public Double divisao(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo) throws Exception {
-        if (!verifyIsNumericUtil.isNumeric(numberOne) || !verifyIsNumericUtil.isNumeric(numberTwo)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
-        }
-        return converterParaDouble.convertToDouble(numberOne) / converterParaDouble.convertToDouble(numberTwo);
+
+        CalculadoraModel calculadoraModel = new CalculadoraModel(numberOne, numberTwo, null);
+
+        return calculadoraService.divisao(calculadoraModel);
     }
 
-    @RequestMapping(value = "/media/{numberOne}",
+    @RequestMapping(value = "/media/{number}",
             method = RequestMethod.GET)
     public Double media(
-            @PathVariable(value = "numberOne") String numberOne) throws Exception {
-        if (!verifyIsNumericUtil.isNumeric(numberOne)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
-        }
-        return converterParaDouble.convertToDouble(numberOne) / 2;
+            @PathVariable(value = "number") String number) throws Exception {
+
+        CalculadoraModel calculadoraModel = new CalculadoraModel(null, null, number);
+
+        return calculadoraService.media(calculadoraModel);
     }
 
-    @RequestMapping(value = "/raizQuadrada/{numberOne}",
+    @RequestMapping(value = "/raizQuadrada/{number}",
             method = RequestMethod.GET)
     public Double raizQuadrada(
-            @PathVariable(value = "numberOne") String number) throws Exception {
-        if (!verifyIsNumericUtil.isNumeric(number)) {
-            throw new UnsupportedMathOperationException("Please set a numeric value");
-        }
+            @PathVariable(value = "number") String number) throws Exception {
 
-        return converterParaDouble.convertToDouble(String.valueOf(Math.sqrt(Double.parseDouble(number))));
+        CalculadoraModel calculadoraModel = new CalculadoraModel(null, null, number);
+
+        return calculadoraService.raizQuadrada(calculadoraModel);
     }
 
 }

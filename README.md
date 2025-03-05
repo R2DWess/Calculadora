@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img.png" alt="Wesley Lima">
+  <img src="logo.png" alt="Wesley Lima">
 </p>
 
 ## PROJETO PESSOAL - CALCULADORA:

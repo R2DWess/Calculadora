@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="Wesley Lima">
+  <img src="https://iili.io/3FFO5cF.png" alt="Universidade Católica de Brasília">
 </p>
 
 ## PROJETO PESSOAL - CALCULADORA:

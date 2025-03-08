@@ -2,7 +2,7 @@
   <img src="https://iili.io/3FFO5cF.png" alt="Universidade Católica de Brasília">
 </p>
 
-## PROJETO PESSOAL - CALCULADORA:
+## PROJETO PESSOAL - CALCULADORA 🧮:
 
 #### Descrição:
 Projeto voltado para a criação de uma calculadora que recebe requisições REST e efetua os calculos
